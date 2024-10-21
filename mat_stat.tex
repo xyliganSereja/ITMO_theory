@@ -1,0 +1,819 @@
+\documentclass{article}
+\usepackage{bbold}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\setlength{\columnseprule}{1pt}
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathdots}
+\usepackage{xfrac}
+
+
+\def\columnseprulecolor{\color{black}}
+
+\graphicspath{ {./resources/} }
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{extendedchars=\true}
+\lstset{style=mystyle}
+
+\newcommand\0{\mathbb{0}}
+\newcommand{\eps}{\varepsilon}
+\newcommand\overdot{\overset{\bullet}}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\const}{const}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\alt}{alt}
+\DeclareMathOperator{\Sim}{sim}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\med}{med}
+\newcommand\1{\mathbb{1}}
+\newcommand\ul{\underline}
+\newcommand{\ppart}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\bf}{\textbf}
+\renewcommand{\it}{\textit}
+\newcommand\vect{\overrightarrow}
+\newcommand{\nm}{\operatorname}
+\DeclareMathOperator{\df}{d}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\bb}{\mathbb}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\an}[2]{\lan #1, #2 \ran}
+\newcommand{\fall}{\forall\,}
+\newcommand{\ex}{\exists\,}
+\newcommand{\lto}{\leftarrow}
+\newcommand{\xlto}{\xleftarrow}
+\newcommand{\rto}{\rightarrow}
+\newcommand{\xrto}{\xrightarrow}
+\newcommand{\uto}{\uparrow}
+\newcommand{\dto}{\downarrow}
+\newcommand{\lrto}{\leftrightarrow}
+\newcommand{\llto}{\leftleftarrows}
+\newcommand{\rrto}{\rightrightarrows}
+\newcommand{\Lto}{\Leftarrow}
+\newcommand{\Rto}{\Rightarrow}
+\newcommand{\Uto}{\Uparrow}
+\newcommand{\Dto}{\Downarrow}
+\newcommand{\LRto}{\Leftrightarrow}
+\newcommand{\Rset}{\bb{R}}
+\newcommand{\Rex}{\overline{\bb{R}}}
+\newcommand{\Cset}{\bb{C}}
+\newcommand{\Nset}{\bb{N}}
+\newcommand{\Qset}{\bb{Q}}
+\newcommand{\Zset}{\bb{Z}}
+\newcommand{\Bset}{\bb{B}}
+\renewcommand{\ker}{\nm{Ker}}
+\renewcommand{\span}{\nm{span}}
+\newcommand{\Def}{\nm{def}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mcA}{\mc{A}}
+\newcommand{\mcB}{\mc{B}}
+\newcommand{\mcC}{\mc{C}}
+\newcommand{\mcD}{\mc{D}}
+\newcommand{\mcJ}{\mc{J}}
+\newcommand{\mcT}{\mc{T}}
+\newcommand{\us}{\underset}
+\newcommand{\os}{\overset}
+\newcommand{\ol}{\overline}
+\newcommand{\ot}{\widetilde}
+\newcommand{\vl}{\Biggr|}
+\newcommand{\ub}[2]{\underbrace{#2}_{#1}}
+\newcommand{\ob}[2]{\overbrace{#2}^{#1}}
+\newcommand{\pat}{\partial}
+
+\def\letus{%
+    \mathord{\setbox0=\hbox{$\exists$}%
+             \hbox{\kern 0.125\wd0%
+                   \vbox to \ht0{%
+                      \hrule width 0.75\wd0%
+                      \vfill%
+                      \hrule width 0.75\wd0}%
+                   \vrule height \ht0%
+                   \kern 0.125\wd0}%
+           }%
+}
+\DeclareMathOperator*\dlim{\underline{lim}}
+\DeclareMathOperator*\ulim{\overline{lim}}
+
+\everymath{\displaystyle}
+
+% Grath
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathmorphing}
+\tikzset{snake/.style={decorate, decoration=snake}}
+\tikzset{node/.style={circle, draw=black!60, fill=white!5, very thick, minimum size=7mm}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\title{\hugeМатематическая статистика}
+\author{Матвеев Сергей M3338}
+\date{5 семестр}
+\begin{document}
+
+\maketitle
+
+\section{Введение}
+Пусть у нас есть генеральная совокупность, но мы хотим ее как-то изучать, тогда мы можем взять ее часть - выборку.\\
+Мы хотим по выборке сделать содержательные вероятностные выводы о генеральной совокупности.\\
+Примеры задач, которые могут быть решены таким способом:\\
+\begin{enumerate}
+    \item Бросок монеты (оценить вероятность орла, честно|нечестно)
+    \item Замеры показателя: какие типичные значения для показателя
+    \item Как учатся мальчики и девочки (одинаково или по разному)
+    \item Цена на недвижимость, расстояние до метро (оценка зависимости)
+\end{enumerate}
+\textbf{Репрезентативность}: на основе выборки можно сделать выводы о генеративной совокупности.
+\section{Простейшая модель выборки. Эмпирическая функция распределения.}
+\textbf{Простейшая модель выборки} - $X_1, X_2, \dots, X_n$ - $i.d.d.$, $F$ - функция распределения (теоретическая функция).\\
+$X_1, \dots, X_n \sim F$ ($F$ мы не знаем априори)\\
+$x_1, \dots, x_n$ - реализация выборки\\
+\textbf{Цель}: оценить из реализации $x_1, \dots, x_n$ теор $F$.\\
+\textbf{Эмпирическая фукнция распределения}:\\
+$\mu_n(t) = \displaystyle\sum_{i = 1}^{n} \mathbb{1}(X_i \leq t)$\\
+$F_n(t) = \frac{\mu_n(t)}{n}$ - эмпирическая функция распределения.\\
+\newpage
+\textbf{Замечение}: Описывает эмпирическое распределениею.\\
+$x_1, \dots, x_n$; $P(U = x_i = \frac{\#\{{X_j:X_j = x_i}\}}{n} = F_n(x_i + 0) - F_n(x_i)$\\
+$\mathbb{1(X_i \leq t)} \sim Bern(F(t))$\\
+$\mathbb{E}(F_n(t)) = F(t)$ (это называется несмещенность)\\
+$\Var(F_n(t)) = \frac{F(t)(1 - F(t))}{n}$\\
+ЗБЧ: $F_n(t) \xrightarrow{\text{$P$}} F(t)$ - это называется состоятельность\\
+ЦПТ: $\frac{\mu_n(t) - nF(t)}{\sqrt{F(t)(1 - F(t)))n}} \xrightarrow{d} U \sim N(0,1) = $\\
+$= \sqrt{n}\frac{F_n(t) - F(t)}{\sqrt{F(t)(1 - F(t))}}$ (ассимптотическая нормальность)\\
+\textbf{Теорема Гливенко-Кантелли}\\
+$\underset{t \in \mathbb{R}}{\sup}|F_n(t) - F(t)| \xrightarrow[n \to \infty]{a.s.} 0$\\
+\textbf{Теорема Колмогорова}\\
+$D_n = \underset{x}{\sup} |F_n(x) - F(x)| \Rightarrow P(\sqrt{n} D_n \leq t) \xrightarrow[n \to \infty]{} K(t) = \displaystyle\sum_{j = -\infty}^{+\infty} (-1)^je^{-2j^2t^2}$\\
+$F \in C(\mathbb{R})$\\
+Такая функция называется функцией Колмогорова\\
+\textbf{Теорема Смирнова}\\
+$X_1, \dots, X_n$, $Y_1, \dots, Y_n$ - независимы\\
+Обе распределены по $F \in C(\mathbb{R})$\\
+$D_{n,m} = \underset{x}{\sup} |F_n(x) - F_m(x)| \Rightarrow P(\sqrt{\frac{mn}{m + n}} D_{n,m} \leq t) \xrightarrow[n \to \infty, m \to \infty]{} K(t)$\\
+Стоит отметить, что обе теоремы имеют смысл при $t \geq 0$\\
+\section{Выборочные моменты}
+$\alpha_k = EX_1^k$ - к-ый теоретический момент.\\
+$\beta_k = E(X_1 - EX_1)^k$ - к-ый центральный момент.\\
+$\overline{g(X)} = \frac{1}{n}\displaystyle\sum_{k = 1}^{n}g(X_k)$, $g: \mathbb{R} \to \mathbb{R}$\\
+$\widehat{\alpha_k} = \overline{X^k} = \frac{1}{n}\displaystyle\sum_{j = 1}^{n}X_j^k$ - к-ый выборочный момент.\\
+$E\widehat{\alpha_k} = \alpha_k$ (несмещенность, мы просто воспользовались линейностью математического ожидания)\\
+$\Var\widehat{\alpha_k} = \frac{1}{n}\Var(X_1^k) = \frac{1}{n}(EX_1^{2k} - (EX_1^k)^2)$\\
+По ЦПТ получаем:\\
+$\sqrt{n}\frac{\widehat{\alpha_k} - \alpha_k}{\alpha_{2k} - \alpha_k^2} \approx N(0,1)$\\
+$\sqrt{n}\frac{\widehat{\alpha_k} - \alpha_k}{\widehat{\alpha_{2k}} - \widehat{\alpha_k}^2} = \sqrt{n}\frac{\widehat{\alpha_k} - \alpha_k}{\alpha_{2k} - \alpha_k^{2}} \cdot \frac{\alpha_{2k} - \alpha_k^2}{\widehat{\alpha_{2k}} - \widehat{\alpha_k}}$ - первый множитель по ЦПТ сходится к $N(0,1)$ по распределнию\\
+Давайте посмотрим что будет со вторым множителем. Он будет сходиться к 1 по вероятности.\\
+Таким обрбазом:\\
+$\sqrt{n}\frac{\widehat{\alpha_k} - \alpha_k}{\alpha_{2k} - \alpha_k^{2}} \cdot \frac{\alpha_{2k} - \alpha_k^2}{\widehat{\alpha_{2k}} - \widehat{\alpha_k}} \xrightarrow[]{d} N(0,1)$\\
+А почему вторая дробь сходится к единице?\\
+$\widehat{\alpha_k} \xrightarrow[]{P} \alpha_k$ (по ЗБЦ, это называется состоятельность)\\
+$\widehat{\alpha_{2k}} - \widehat{\alpha_k}^2 \xrightarrow[]{P} \alpha_{2k} - \alpha_k^2$\\
+$\overline{X}$ - выборочное среднее.\\
+$\widehat{\beta_k} = \overline{(X - \overline{X})^k} = \frac{1}{n}\displaystyle\sum_{j = 1}^{n} (X_j -\overline{X})^k$ - к-ый выборочный момент.\\
+$\widehat{\beta_2} = S_{*}^2$ - выборочная дисперсия.\\
+$S_{*}$ - выборочное стандартное отклонение (выборочное среднеквадратичное отклонение).\\
+$Note:$ выборочные моменты есть ничто иное как моменты посчитанные относительно эмпирического распределения.\\
+$S_{*} = \overline{X^2} - (\overline{X}^2)$\\
+$\widehat{\beta_k} = Poly(\widehat{\alpha_k}, \dots, \widehat{\alpha_1})$\\
+$\widehat{\alpha_1}, \dots, \widehat{\alpha_k}$ - состоятельные оценки (имеет место сходимость по вероятности)\\
+Так как полином это непрерывная функция, то $\widehat{\beta_k} \xrightarrow[]{P} \beta_k$\\
+\textbf{TODO}
+\section{Небольшое отступление}
+Пусть $\xi_n$ - последовательность случайных векторов.\\
+$\sqrt{n}(\xi_n - \mu) \xrightarrow[]{P} N(0, \Sigma)$\\
+$\xi_n \xrightarrow[]{P} \mu$ ??? Давайте убедимся в этом\\
+    $(\xi_n - \mu)\sqrt{n} \cdot \frac{1}{\sqrt{n}} \xrightarrow[]{d} 0$ (Первое сходится к нормальному многомерному закону, а второе к нулю)\\
+    Мы знаем, что для вырожденных величин сходимость по распределению и вероятности равносильны.\\
+    Тогда мы можем написать $(\xi_n - \mu)\sqrt{n} \cdot \frac{1}{\sqrt{n}} \xrightarrow[]{P} 0$\\
+    $\sqrt{n}(\varphi(\xi_n) - \varphi(\mu)) \to$ ??\\
+    $\varphi \in C^1(\mathbb{R}^m)$, $\varphi: \mathbb{R}^m \to \mathbb{R}$\\
+    По Тейлору:\\
+    $\varphi(\xi_n) \approx \varphi(\mu) + \nabla \varphi(\widetilde{\mu})(\xi_n - \mu)$ (Остаток в форме Лагранжа)\\
+    $\nabla \varphi(\widetilde{\mu}) \xrightarrow[n \to \infty]{} \nabla \varphi(\mu)$\\
+    $\varphi(\xi_n) - \varphi(\mu) \approx \nabla \varphi(\mu)(\xi_n - \mu)$\\
+    $\Var(\dots) \approx \Var(\nabla \varphi(\mu)(\xi_n - \mu)) = \Var(\nabla \varphi(\mu) \xi_n) = \nabla \varphi \Var \xi_n (\nabla \xi_n)^T$\\
+    Вернемся к следующему равентву:\\
+    $\varphi(\xi_n) - \varphi(\mu) \approx \nabla \varphi(\mu)(\xi_n - \mu)$\\
+    $\sqrt{n} (\varphi(\xi_n) - \varphi(\mu)) \approx \sqrt{n}\nabla \varphi(\mu)(\xi_n - \mu)$\\
+    $\sqrt{n} (\xi_n - \mu) \to N(0, \Sigma)$ (Как мы и говорили выше)\\
+    А мы домножаем вектор на градиент, поэтому:\\
+    $\sqrt{n} \nabla \varphi(\mu) (\xi_n - \mu) \to N(0, \nabla \varphi(\mu) \Sigma (\nabla \varphi(\mu))^T)$\\
+Это называется дельта метод.\\
+\textbf{Теорема}\\
+Пусть $\xi_n = (\overline{X},\dots, \overline{X^k})$\\
+\textbf{Многомерная версия ЦПТ}\\
+$\sqrt{n}(\xi_n - \alpha) \xrightarrow[]{d} N(0, \Sigma)$\\
+$\alpha = (\alpha_1,\dots,\alpha_k)$\\
+$\Sigma = \Var(X_1, \dots, X_1^k)$\\
+$\varphi: \mathbb{R}^k \to \mathbb{R}$\\
+$\varphi \in C^1(\mathbb{R}^k)$\\
+$\sigma^2 = \nabla \varphi(\alpha) (\nabla \varphi(\alpha))^T > 0$\\
+Тогда (продолжение теоремы):\\
+$\sqrt{n}\frac{\varphi(\xi_n) - \varphi(\alpha)}{\sigma} \xrightarrow[]{d} N(0,1)$\\
+Кроме того:\\
+$\sigma = \sigma(\alpha) \in C^1(\mathbb{R}^k) \Rightarrow \sqrt{n} \frac{\varphi(\xi_n) - \varphi(\alpha)}{\sigma(\xi_n)} \xrightarrow[]{d} N(0,1)$\\
+Коэффициент аассиметрии: $\frac{E(X - EX)^3}{\sigma^3} = \gamma$\\
+$\frac{\widehat{\beta_3}}{S_*^3} = \widehat{\gamma}$\\
+Коэффициент эксцесса: $\frac{E(X - EX)^4}{\sigma^4} - 3$\\
+$\frac{\widehat{\beta_4}}{S_*^4} - 3$\\
+Пусть у нас есть две выборки:\\
+$X_1,\dots,X_n$\\
+$Y_1,\dots,Y_n$\\
+$\Cov(X,Y) = EXY - EX \cdot EY = E(X - EX)(Y - EY)$\\
+$S_{*XY} = \frac{1}{n}\displaystyle\sum_j(X_j - \overline{X})(Y_j - \overline{Y}) = \frac{1}{n}\displaystyle\sum_j X_jY_j - \overline{X} \overline{Y}$\\
+$\rho = \frac{\Cov(X,Y)}{\sqrt{VarX \cdot VarY}}$\\
+$\rho = \frac{S_{*XY}}{S_{*X} \cdot S_{*Y}}$ - Выборочный коэффициент корреляции (коэффициент корреляции Пирсона)\\
+\section{Порядковые статистики}
+\textbf{Определение. Вариационный ряд}\\
+$X_{(1)} \leq X_{(3)} \leq \dots \leq X_{(n)}$ - вариационный ряд\\
+\textbf{Определение. Порядковая статистика}\\
+$X_{(k)}$ - к-я порядковая статистика.\\
+Квантиль порядка $\alpha$\\
+$P(X \geq q_\alpha) \geq 1 - \alpha$\\
+$P(X \leq \alpha) \geq \alpha$\\
+Это общее определение\\
+Если $F$ строго возрастает:\\
+$F(q_\alpha) = \alpha \Leftrightarrow q_\alpha = F^{-1}(\alpha)$\\
+$F^{-1}(\alpha): \sup\{x : F(x) \leq \alpha\}, \inf\{x : F(x) \geq \alpha\}$\\
+\textbf{Определение. Выборочный квантиль порядка $\alpha$}\\
+$\alpha \in (0,1)$\\
+$\exists 0 \leq k \leq n - 1: \frac{k}{n} \leq \alpha < \frac{k + 1}{n}$\\
+$X_{(k + 1)}$ - выборочный квантиль порядка $\alpha$\\
+$\alpha = 0$ $\min(X)$ - нулевой квартиль\\
+$F^{-1} = \sum\{x \in \mathbb{R} F_n(x) \leq \alpha\}$\\
+$\alpha = \frac{1}{4}$ - первый вартиль (нижний квартиль)\\
+$\alpha = \frac{1}{2}$ - второй квартиль (выборочная медиана)\\
+$\alpha = \frac{3}{4}$ - третий квартиль (верхний квартиль)\\
+$\alpha = 1$ - $\max(X)$ (четвертый квартиль)\\
+$n = 2m \Rightarrow = med(X) = \frac{X_(m) + X_(m + 1)}{2}$\\
+$n = 2m + 1 \Rightarrow med(X) = X_(m + 1)$\\
+$IQR = \Delta$ между верхним и нижним квартилем.\\
+$P(X_{(k)} \leq t) = P(\mu_n(t) \geq k) = \displaystyle\sum_{j = k}^n C_n^j F^j(t)(1 - F(t))^{n - j}$\\
+$B(z,a,b) = \frac{\Gamma(a + b)}{\Gamma(a)\Gamma(b)} \displaystyle\int_0^z t^{a - 1}(1 - t)^{b - 1}dt = B(F(t),k,n - k + 1)$\\
+$0 \leq z \leq 1$\\
+Пусть $p()$ - теоретическая плотность, то есть $p = F'$\\
+$(P(X_(k) \leq t))_t' = \frac{\Gamma(n + 1)}{\Gamma(k) \Gamma(n - k + 1)} \cdot F^{k - 1}(t)(1 - F(t))^{n - k} \cdot p(t)$ - плотность к-й порядковой статистики\\
+Рассуждая аналогично можно получить плотность для двухмерного случая:\\
+$g(x_1,x_2) = \frac{n!}{(k - 1)!(r - k - 1)!(n - k)!} \cdot F^{k - 1}(x_1)(F(x_2) - F(x_1))^{r - k - 1}(1 - F(x_2))^{n = r}p(x_1)p(x_2)$ - плотность для $(X_{(k)}, X_{(r)})$, $l < r$\\
+$g(x_1, \dots,x_n) = n!p(x_1)\cdot \dots \cdot p(x_n)$ - плотность для $(X_{(1)}, \dots, X_{(n)}$\\
+Средний член вариационного ряда: $\frac{K(n)}{n} \to const \in (0,1)$\\
+Крайний член вариационного ряда:\\
+$X_{(r)}$, $r$ - огр.\\
+$X_{(n + 1 - s)}$, $s$ - огр.\\
+\textbf{Теорема об ассимптотике среднего члена вариационного ряда}\\
+$0 < \alpha < 1$ - теоретическая плотность.\\
+$q_\alpha$ - теоретический квантиль порядка $\alpha$\\
+$p \in C^1($ окр-сть $q_\alpha)$\\
+$p(q_\alpha) > 0$\\
+Тогда:\\
+$\sqrt{n} \cdot f(q_\alpha) \frac{X_{(\lfloor n \alpha \rfloor)} - q_\alpha}{\sqrt{\alpha (1 - \alpha)}} \xrightarrow[]{d} N(0, 1)$\\
+\textbf{Идея доказательства}\\
+Пусть $\lfloor n \alpha \rfloor = k$\\
+Мы умеем писать плотность для $X_{(k)}$\\
+Затем у нас идет преобразование:\\
+$g(x) = \sqrt{n}p(q_\alpha)\frac{x - q_\alpha}{\sqrt{\alpha(1 - \alpha)}} \leadsto p_{g(X_{(k)})}(t) = p_{X_{(k)}}(g^{-1}(t))|g^{-1}(t)_t'|$ (теорема из прошлого семестра)\\
+Там вылезут факториалы, от них мы умеем избавляться по Стирлингу\\
+Затем надо будет воспользоваться непрерывной дифференцируемостью:\\
+$p \in C^1($ окр-сть $q_\alpha)$\\
+$p(q_\alpha) > 0$\\
+Тогда в пределе наша новая плотность будет стремиться к плотности нормального стандартного закона.\\
+\textbf{Пример. Распределение Коши.}\\
+$Couchy(\mu, 1)$ $\alpha = \frac{1}{2}$\\
+$2f(\mu)\sqrt{n}(X_{(\lfloor \frac{n}{2} \rfloor)}) = \frac{1}{\pi} \cdot \frac{1}{1 + (\mu - \mu)^2} \cdot 2\sqrt{n}(X_{(\lfloor \frac{n}{2} \rfloor}) - \mu)$\\
+\textbf{Теорема об ассимптотике крайних членов вариационного ряда}\\
+$r,s,F,x,p()$ - плотность\\
+Тогда:\\
+$n F(X_{(r)}) \xrightarrow[]{d} \Gamma(r,1)$\\
+$n F(X_{(n + 1 - s)}) \xrightarrow[]{d} \Gamma(s, 1)$\\
+И оба распределения независимы.\\
+\textbf{Идея доказательства}\\
+У нас есть совместная плотность и какое-то преобразование, тогда мы можем написать плотность после преобразования\\
+Затем берем предел и мы получим плотность равная произведению двух этих двух законов.
+\section{Постановка задачи точечного оценивания параметров}
+$X_1, \dots, X_n \sim F_{\theta} \in \Theta \subset \mathbb{R}^d$\\
+$\theta$ - некий фиксированный неизвестный вектор.\\
+Наша цель оценит $\theta$ в виде $\widehat{\theta} = \widehat{\theta}(X_1, \dots, X_n)$\\
+\textbf{Замечание}:
+\begin{enumerate}
+    \item $\widehat{\theta}(X_1, \dots, X_n)$ - статистика (измеримая функция от выборки)
+    \item Байесовская постановка: $\theta$ - случайная величина из известного апреорного распределения
+\end{enumerate}
+\textbf{Определение. Состоятельность}\\
+$\widehat{\theta}$ - состоятельная оценка $\theta \Leftrightarrow \widehat{\theta} \xrightarrow[]{P} \theta$\\
+\textbf{Определение. Несмещенность}\\
+$b.as(\widehat{\theta}) \stackrel{def}{=} E\widehat{\theta} - \theta$ - смещение\\
+$b.as(\widehat{\theta}) = 0 \Leftrightarrow$ несмещенная\\
+\textbf{Определение. Ассимптотическая нормальность}\\
+$\sqrt{n}(\widehat{\theta} - \theta) \to N(0, \Sigma_{\theta})$\\
+\textbf{Пример}
+\begin{enumerate}
+    \item $X_1, \dots, X_n \sim Bern(p)$\\
+    $\widehat{\theta} = \overline{X}$\\
+    ЗБЧ $\overline{X} \to p$\\
+    $E\widehat{\theta} = E\overline{X} = p$ (несм)\\
+    ЦПТ $\sqrt{n}\frac{\overline{X} - p}{\sqrt{p(1 - p)}} \to N(0, 1)$
+    \item $N(\mu, \sigma^2)$, $\mu$ - известна\\
+    $\theta = S_*^2$\\
+    $S_*^2 \to \sigma^2$\\
+    $ES_*^2 = \frac{n - 1}{n}\sigma^2 \neq \sigma^2$ (несмещенность)\\
+    $\sqrt{n}\frac{S_*^2 - \sigma^2}{\sqrt{\beta_4 - \sigma^4}} \xrightarrow[]{d} N(0,1)$
+\end{enumerate}
+\textbf{Определение. Эффективность (оптимальность)}\\
+$\widehat{\theta_1}$ эффективнее $\widehat{\theta_2} \Leftrightarrow MSE\widehat{\theta_1} < MSE\widehat{\theta_2}$\\
+$MSE\widehat{\theta} = E\norm{\widehat{\theta} - \theta}^2 = E(\widehat{\theta} - \theta)^T(\widehat{\theta} - \theta)$\\
+\textbf{Утверждение}\\
+$MSE\widehat{\theta} = tr(\Var\widehat{\theta}) + \norm{b.as \widehat{\theta}}^2$\\
+\textbf{Доказательство}\\
+$MSE = E(\widehat{\theta} - \theta)^T(\widehat{\theta} - \theta) = E(\widehat{\theta} - E\widehat{\theta} + E\widehat{\theta} - \theta)^T(\widehat{\theta} - E\widehat{\theta} + E\widehat{\theta} - \theta) = E(\widehat{\theta} - E\widehat{\theta})^T(\widehat{\theta} - E\widehat{\theta}) = \displaystyle\sum \Var\widehat{\theta_i} + \norm{b.as \widehat{\theta}}^2$
+\begin{enumerate}
+    \item Ассимптотическая нормальность $\Rightarrow$ состоятельность\\
+    $\widehat{\theta} - \theta = \frac{1}{\sqrt{n}}(\widehat{\theta} - \theta) \xrightarrow[]{P} 0$\\
+    \item Ассимптотическая нормальность $\Rightarrow$ $b.as \widehat{\theta} \to 0$\\
+    Пусть $d = 1$\\
+    $P(|\theta - E\widehat{\theta}| > \varepsilon) = P(\frac{\sqrt{n}|\theta - E\widehat{\theta}|}{\sigma} > \frac{\varepsilon \sqrt{n}}{\sigma}) = 1 - P(\dots < \frac{\varepsilon \sqrt{n}}{\sigma}) \approx 1 - (2\Phi(\frac{\varepsilon \sqrt{n}}{\sigma}) - 1) = 2(1 - \Phi(\frac{\varepsilon \sqrt{n}}{\sigma})) \to 0$
+    \item Состоятельность $\Rightarrow$ $b.as \widehat{\theta} \to 0$\\
+    Следует из усиленного закона больших чисел\\
+    $\overline{X} \xrightarrow[]{a.s} \mu \Rightarrow E\overline{X} \to \mu$ (По теореме Лебега о мажорируемой сходимости)
+    \item Пусть $d = 1$, $b.as \widehat{\theta} \to 0, \Var\widehat{\theta} \to 0 \Rightarrow \widehat{\theta}$ - сост.
+\end{enumerate}
+\section{Метод моментов}
+Рассмотрим $g_1, \dots, g_d$\\
+$\exists Eg_1(X_1) = m_1(\theta_1, \dots, \theta_d)$\\
+$\exists Eg_2(X_2) = m_2(\theta_1, \dots, \theta_d)$\\
+$\dots$\\
+$\exists Eg_d(X_d) = m_d(\theta_1, \dots, \theta_d)$\\
+$\begin{cases}
+\overline{g_1(X)} = m_1(\widehat{\theta_1}, \dots, \widehat{\theta_d})\\
+\dots\\
+\overline{g_d(X)} = m_d(\widehat{\theta_1}, \dots, \widehat{\theta_d})
+\end{cases}$\\
+Пусть $\exists!$ решение:\\
+$\begin{cases}
+\widehat{\theta_1} = \alpha_1(\overline{g_1(X)}, \dots, \overline{g_d(X)})\\
+\dots\\
+\widehat{\theta_d} = \alpha_d(\overline{g_1(X)}, \dots, \overline{g_d(X)})
+\end{cases}$\\
+Тогда это будет оценка методов моментов.\\
+По умолчанию $g_j(x) = x^j$\\
+\textbf{Пример}\\
+$U[\theta_1, \theta_2]$, $\theta_1 < \theta_2$\\
+$g_1(x) = x, g_2(x) = x^2$\\
+$Eg_1(X_1) = EX_1 = \frac{\theta_1 + \theta_2}{2}$\\
+$Eg_2(X_1) = EX_1 = \frac{(\theta_2 - \theta_1)^2}{12} + \frac{(\theta_1 + \theta_2)^2}{4} = \frac{\theta_2^2 - 2\theta_1\theta_2 + \theta_1^2}{12} + \frac{\theta_1^2 + 2\theta_1\theta_2 + \theta_2^2}{4} = \frac{\theta_1^2 + \theta_1\theta_2 + \theta_2^2}{3}$\\
+Далее составим уравнения:\\
+$\begin{cases}
+\overline{X} = \frac{\widehat{\theta_1} + \widehat{\theta_2}}{2}\\
+\overline{X^2} = \frac{\widehat{\theta_1^2} + \widehat{-\theta_1}\widehat{\theta_2} + \widehat{\theta_2^2}}{3}
+\end{cases}$ $\Leftrightarrow$ $\begin{cases}
+    \widehat{\theta_2} = 2\overline{X} - \widehat{\theta_1}\\
+    3\overline{X^2} = \widehat{\theta_1^2} + \widehat{-\theta_1}\widehat{\theta_2} + \widehat{\theta_2^2}
+\end{cases}$\\
+$3\overline{X^2} = \widehat{\theta_1^2} + \widehat{\theta_1}(2\overline{X} - \widehat{\theta_1}) + (2\overline{X} - \widehat{\theta_1})^2$\\
+$\widehat{\theta_1^2} - 2\overline{X}\widehat{\theta_1} + 4(\overline{X}^2 - 3\overline{X^2}) = 0$\\
+Считаем дискриминант деленный на четыре:\\
+$\frac{D}{4} = (\overline{X})^2 - 4(\overline{X})^2 + 3\overline{X^2} = 3(\overline{X^2 - (\overline{X})^2}) = 3S_*^2$\\
+У нас будет два случая:\\
+\begin{enumerate}
+    \item $\begin{cases}
+        \widehat{\theta_1} = \overline{X} + \sqrt{3}S_*\\
+        \widehat{\theta_2} = \overline{X} - \sqrt{3}S_*
+    \end{cases}$
+    \item $\begin{cases}
+        \widehat{\theta_1} = \overline{X} - \sqrt{3}S_*\\
+        \widehat{\theta_2} = \overline{X} + \sqrt{3}S_*
+    \end{cases}$
+\end{enumerate}
+Первый не возможен, потому что $\theta_1 < \theta_2$\\
+\begin{enumerate}
+    \item если $(\overline{g_1(X)}, \dots, \overline{g_d(X)})$ - состоятельаня оценка
+    \item если $(\overline{g_1(X)}, \dots, \overline{g_d(X)})$ - ассимптотически нормальные и $g_1, \dots, g_d$ - гладкие, то каждая из оценок ассимтотичесик нормальные.
+\end{enumerate}
+\section{Метод максимального правдоподобия}
+probability must function: $p(x, \theta) = p(x|\theta)$\\
+probability identity function: $p(x, \theta) = p(x|\theta)$\\
+Будем называть оба случая плотностью.\\
+Пусть у нас есть выборка $X_1, \dots, X_n \sim p(x|\theta)$\\
+$L(x|\theta) = \displaystyle\prod p(x_i|\theta)$ - функция правдоподобия\\
+$\theta^* = \underset{\widehat{\theta}}{argmax}(L(x, \theta))$ - оценка максимума правдоподобия\\
+$\theta \in \Theta$ - открыто\\
+$\theta_1 \neq \theta_2 \Rightarrow L(x,\theta_1) \neq L(x, \theta_2)$\\
+\textbf{Доказательство}
+\begin{enumerate}
+    \item Посмотреть и подумать
+    \item Рассмотреть $\ln{L(x|\theta)}$; $\frac{\partial \ln{L(x, \theta)}}{\partial \theta}$
+    \item $\frac{\partial \ln{L(x, \theta)}}{\partial \theta} = 0$
+    \item Проверить достаточные условия максимума
+\end{enumerate}
+\textbf{Пример}
+\begin{enumerate}
+    \item $N(\theta_1, \theta_2)$\\
+    $L(x, \theta) = \displaystyle\prod_{i = 1}^n \frac{1}{\sqrt{2\pi \theta_2}} \exp{(-\frac{(x_i - \theta_1)^2}{2\theta_2}})$\\
+    $\ln{L(x,\theta)} = \displaystyle\sum_{i = 1}^n [-\frac{1}{2}\ln{2\pi} - \frac{1}{2}\theta_2 - \frac{(x_i - \theta_1)^2}{2\theta_2}]$\\
+    $\frac{\partial\ln{L(x, \theta_1)}}{\theta_1} = \displaystyle\sum_{i = 1}^n\frac{2(x_i - \theta_1)}{2\theta_2} = \displaystyle\sum_{i = 1}^n\frac{x_i - \theta_1}{\theta_2}$\\
+    $\frac{\partial\ln{L(x, \theta)}}{\partial \theta_2} = \displaystyle\sum_{i = 1}^n[-\frac{1}{2\theta_2} + \frac{(x-i - \theta_1)^2}{2\theta_2^2}]$\\
+    $\displaystyle\sum_{i = 1}^n \frac{(x_i - \widehat{\theta_1})}{\widehat{\theta_2}} = 0 \Rightarrow \widehat{\theta_1} = \overline{X}$\\
+    $\displaystyle\sum_{i = 1}^n [-\frac{1}{2\widehat{\theta_2}} + \frac{(x_i - \widehat{\theta_1})^2}{2\widehat{\theta_2}^2}] = 0 \Rightarrow \widehat{\theta_2} = S_*^2$
+    \item $U[0, \theta]: L(X, \theta) = \frac{1}{\theta^n}\mathbb{1}(X_i \in [0, \theta], \forall 1 \leq i \leq n)$\\
+    $X_1, \dots, X_n: p(X_i, \theta)$\\
+    $L(X_1, \dots, X_n, \theta) = \displaystyle\prod_{i = 1}^np(x_i, \theta)$\\
+    $L(X,\theta) = \theta^{\Sigma X_i}(1 - \theta)^{n - \Sigma X_i}$\\
+    Вернемся к нашему примеру:\\
+    Если $\widehat{\theta} < \max(X)$, то $L(x, \widehat{\theta}) = 0$\\
+    Чем меньше $\theta$, тем больше $\frac{1}{\theta}$\\
+    $\Rightarrow \widehat{\theta} = \max(X)$
+\end{enumerate}
+$Poly(1, p): p = (p_1, \dots, p_m)$\\
+Рассмотрим частоты:\\
+$\nu_1$ - кол-во наблюдений типа 1\\
+$\dots$\\
+$\nu_m$ - кол-во наблюдений типа $m$\\
+Суммируем и смотрим на функцию правдоподобия\\
+$L(X, p) = p_1 \dots p_m$\\
+$\ln{L(X, p)} = \displaystyle\sum_{j = 1}^{m - 1}\nu_j \ln{p_j} + \nu_m \ln{(1 - P_1 - \dots - p_{m - 1})}$\\
+$\frac{\partial \ln{L\dots}}{\partial p_j} = \frac{\nu_j}{p_j} - \frac{\nu_m}{1 - p_1 - \dots - p_{m - 1}} = 0$\\
+$\displaystyle\sum$ уравнения: $\nu_j(1 - \widehat{p_1} - \dots - \widehat{p_{m - 1}}) = \widehat{p_j} \cdot \nu_m$\\
+$\widehat{p_m}(n - \nu_m) = \nu_m (1 - \widehat{p_m})$\\
+$\widehat{p_m}n - \widehat{p_m}\nu_m = \nu_m$\\
+$\widehat{p_m} = \frac{\nu_m}{n}$\\
+$\widehat{p_j} = \frac{\nu_j \widehat{p_m}}{\nu_m} = \frac{\nu_j}{n}$
+\section{Информация Фишера}
+$d = 1: L(X, \theta) = \displaystyle\prod p(X_j, \theta)$\\
+$\ln{L(X, \theta)} = \displaystyle\sum \ln{p(x_j, \theta)}$\\
+$V(X, \theta) = \frac{\partial \ln{L\dots}}{\partial \theta} = \displaystyle\sum \frac{\partial \ln{p\dots}}{\partial \theta}$ - вклад выборки\\
+$\theta \in \Theta$ - открыто\\
+$\theta_1 \neq \theta_2 \Rightarrow p(X, \theta_1) \neq p(X, \theta_2)$\\
+Регулярность:\\
+\begin{enumerate}
+    \item $\frac{\partial}{\partial \theta} \displaystyle\int_X T(X) L(X_i, \theta)dX = \displaystyle\int \frac{\partial}{\partial \theta}L(X, \theta) \cdot T(X) dX$\\
+    Необходимое условие $\sup p_x$ не зависит от $\theta$\\
+    $U[0, \theta]$ $\displaystyle\int_{0}^{\theta} \frac{1}{\theta}dt = 1$\\
+    $(\displaystyle\int_0^{\theta} \frac{1}{\theta}dt)_{\theta}' = (\frac{1}{\theta}\displaystyle\int_0^\theta dt)_\theta' = -\frac{1}{\theta^2} \displaystyle\int_0^\theta dt + \frac{1}{\theta} = 0 \neq \displaystyle\int_0^\theta(\frac{1}{\theta})_\theta' dt$
+    \item $EV^2(X, \theta) < \infty$
+\end{enumerate}
+$\displaystyle\int_X L(X, \theta)dX = 1 \xrightarrow[]{\frac{\partial}{\partial \theta}} \displaystyle\int_X \frac{\partial L(.)}{\partial \theta}dX = \displaystyle\int_X \frac{\frac{\partial L(\dots)}{\partial \theta}}{L(\dots)} \cdot L(\dots) dX = \displaystyle\int_X V(X, \theta) L(X, \theta) dX = EV(X, \theta) = 0$\\
+$I(\theta) = \Var(V(X_i, \theta)) = E(V^2(X_i, \theta))$ - информация Фишера для всей выборки\\
+$V(X, \theta) = \displaystyle\sum_j \frac{\partial \ln{p(x, \theta)}}{\partial \theta} \Rightarrow \Var(V(X, \theta)) = n \cdot \Var \frac{\partial \ln{p(x, \theta)}}{\partial \theta}$\\
+$i(\theta)$ - информация Фишера для 1 наблюдения\\
+$i(\theta) = E(\frac{\partial \ln{p(x_j, \theta)}}{\partial \theta})^2$\\
+$\frac{\partial}{\partial \theta} \displaystyle\int_\mathbb{R} \frac{\partial \ln{P(x, \theta)}}{\partial \theta} \cdot p(x, \theta) dx = \displaystyle\int_\mathbb{R} \frac{\partial^2 \ln{p(x, \theta)}}{\theta} dx + \displaystyle\int_\mathbb{R} \frac{\partial \ln{\dots}}{\partial \theta} \frac{\partial p \dots}{\partial \theta} dx = E \frac{\partial^2 \ln{p(x, \theta)}}{\partial \theta^2} + E(\frac{\partial \ln{o(x, \theta)}}{\partial \theta})^2 = 0$\\
+$i(\theta) = E(\frac{\partial \ln{p(x_j, \theta)}}{\partial \theta})^2 = -E\frac{\partial^2 \ln{p(x, \theta)}}{\partial \theta^2}$\\
+Произвольное $d$:\\
+$i(\theta) = -(E\frac{\partial^2 \ln{p(X, \theta)}}{\partial \theta_i \partial \theta_j})_{1 \leq i, j \leq d}$\\
+$I(\theta) = n i(\theta)$\\
+$N(\theta_1, \theta_2)$\\
+$p(x, \theta_1, \theta_2) = \frac{1}{\sqrt{2\pi \theta_2}} \cdot \exp(-\frac{(x - \theta_1)^2}{2\theta_2})$\\
+$\ln{p(x, \theta_1, \theta_2)} = -\frac{1}{2} \ln{2\pi} - \frac{1}{2}\ln{\theta_2} - \frac{(x - \theta_1)^2}{2\theta_2}$\\
+$\frac{\partial \ln{p(x, \theta_1, \theta_2)}}{\partial \theta_1} = \frac{x - \theta_1}{\theta_2}$\\
+$\frac{\partial \dots}{\partial \theta_2} = - \frac{1}{2 \theta_2} + \frac{(x - \theta)}{}$
+TODO:\\
+\textbf{Теорема. Неравенство Рао-Крамера}\\
+Модель регулярная, d = 1\\
+$\tau(\theta)$ - оцениваемая функция\\
+$\tau \in C^1$ (как правило $\tau(\theta) = \theta$)\\
+$\widehat{\tau(\theta)} = \theta \Rightarrow \Var \widehat{\tau(\theta)} \geq \frac{[\tau'(\theta)]^2}{n i(\theta)}$\\
+$\tau'(\theta) = \displaystyle\int \widehat{\tau(\theta}) \frac{\partial L(X, \theta)}{\partial \theta} dX = \displaystyle\int \widehat{\tau(\theta)}V(X, \theta)dX - EV(X, \theta) \cdot E\widehat{\tau(\theta)} = \Cov(V(X, \theta), \widehat{\tau(\theta)})$\\
+$\Cov^2(V(X, \theta), \widehat{\tau(\theta)}) \leq \Var(V(X, \theta)) \cdot \Var(\widehat{\tau(\theta)})$\\
+\textbf{Замечания}
+\begin{enumerate}
+    \item $E \widehat{\tau(\tau)} - \tau(\theta)  =bias(\theta) \neq 0$\\
+    $E\widehat{\tau(\theta)} = \tau(\theta) + bias(\theta)$\\
+    $\Var\widehat{\tau(\theta)} \geq \frac{[\tau'(\theta) + bias'(\theta)]^2}{ni(\theta)}$
+    \item 
+\end{enumerate}
+\textbf{Многомерный случай}\\
+$\tau(\theta): \mathbb{R}^d \to \mathbb{R}$\\
+$\tau \in C^1$\\
+$E\widehat{\tau{\theta}} = \tau{\theta} \Rightarrow \Var\widehat{\tau(\theta)} \geq \frac{\nabla \tau(\theta)i^{-1}(\theta)\nabla^T\tau(\theta)}{n}$\\
+\textbf{Пример}\\
+$N(\theta_1, \theta_2)$\\
+$\tau(\theta_1, \theta_2) = \theta_1$\\
+$E\widehat{\theta_1} = \theta_1 \Rightarrow \Var\widehat{\theta_1} \geq \frac{(1, 0) \begin{pmatrix}
+\theta_2 & 0\\
+0 & 2\theta_2^2
+\end{pmatrix} \cdot (1, 0)^T}{n} = \frac{\theta_2}{
+n}$\\
+\textbf{Свойства оценки}
+\begin{enumerate}
+    \item Если $\exists$ несмещенная оптимальная оценка в регулярном случае то она совподает с оценкой максимальног правдоподобия (ОМП)\\
+    $\tau(\theta) = \theta$\\
+    $V(X, \theta) = \frac{1}{a(\theta)}(\widehat{\theta} - \theta)$
+\end{enumerate}
+\section{Состоятельность ОМП}
+Пусть $\theta_0$ - реальный параметр $\Rightarrow p_{\theta_0}(L(X, \theta_0) > L(X, \theta)) \to 1$\\
+$\frac{L(X, \theta)}{L(X, \theta_0)} < 1$\\
+$\frac{1}{n}\displaystyle\sum \ln{\frac{p(X_j, \theta)}{p(X_j, \theta)}} < 0$\\
+По ЗБЧ $\Rightarrow E_{\theta_0} \ln{\frac{p(x_j, \theta)}{p(x_j, \theta_0)}} \leq E_{\theta_0} [\frac{p(X_j, \theta)}{p(X_j, \theta_0)} - 1] = \displaystyle\int_X p(X, \theta)dX - \displaystyle\int p(X, \theta_0)dX = 0$\\
+Давайте введем события:\\
+$S_n = \{X : \ln{L(X, \theta_0)} > \ln{L(X, \theta_0 - a)}\} \cap \{X : \ln{L(X, \theta_0)} > \ln{L(X_i \theta_0 + a)}\}$\\
+$P_{\theta_0}(S_n) \to 1$\\
+$A_n = \{X : |\widehat{\theta} - \theta_0| < a\}$\\
+$B_n = \{X : \frac{\partial \ln{L(X, \theta)}}{\partial \theta} |_{\theta = \widehat{\theta}} = 0\}$\\
+$S_n \subset A_n B_n \subset A_n \Rightarrow P(A_n) \to 1$\\
+Давайте поговорим про свойства метода максимального правдоподобия\\
+\begin{enumerate}
+    \item Принцип инвариантности\\
+    $\theta \in Theta \xrto[\varphi]{biection} \gamma \in \Gamma$\\
+    $\theta = \varphi^{-1}(\theta) \LRto \gamma = \varphi(\theta)$\\
+    $\underset{\theta}{\sup}L(X, \varphi(\gamma)) = \underset{\gamma}{\sup}L(x, \gamma)$\\
+    $\gamma* = \varphi(\theta*)$\\
+    \textbf{Пример}\\
+    Пусть у нас есть $Exp(\lambda)$ и есть две параметризации\\
+    \begin{itemize}
+        \item $\lambda e^{-\lambda x} \to \frac{1}{\overline{X}}$
+        \item $\frac{1}{\lambda} \exp(-\frac{x}{\lambda}) \to \overline{X}$
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Теорема Ассимптотическая нормальность ОМП}\\
+Пусть наша модель регулярная, так же пусть:\\
+$|\frac{\partial^3 \ln{f(x, \theta)}}{\partial \theta_i \partial \theta_j \partial \theta_k}| \leq M$\\
+$\theta_*$ - ОПМ для $\theta$\\
+Уравнение $\nabla \ln{L(X, \theta)} = 0$ имеет еддинственное решение.
+Тогда:\\
+\begin{enumerate}
+    \item $\sqrt{n}(\theta_* - \theta) \to N(0, i^{-1}(\theta))$
+    \item $\tau(\theta)$ - оцениваемая функция от $\theta$\\
+    $\tau \in C^1$\\
+    $\sqrt{n}(\tau(\theta_*) - \tau(\theta)) \to N(0, \sigma^2)$\\
+    $\sigma^2 = \nabla\tau(\theta)i^{-1}(\theta)\nabla^T\tau(\theta)$
+    \item $\sigma^2$ - непрерывная функция от $\theta$ $\Rto \sqrt{\frac{\tau(\theta_*) - \tau(\theta)}{\sigma(\theta_*)}} \to N(0, 1)$
+\end{enumerate}
+В прошлый раз мы ввели функцию\\
+$V(X, \theta) = \frac{\partial\ln{L(X, \theta)}}{\partial\theta}$\\
+$\theta_0$ - реальный параметр\\
+Давайте напишемя ряд Тейлора\\
+$V(X, \theta) = V(X, \theta_0) + V'_{\theta}(X, \theta)(\theta - \theta_0) + V''_{\theta}(X, \tilde\theta) \frac{(\theta - \theta_0)^2}{2}$, $\tilde{\theta}$ между $\theta_0$ и $\theta$\\
+Выполним подстановку $\theta = \theta_*$\\
+$0 = V(X, \theta_0) + V'_\theta(X, \theta_0)(\theta_* - \theta_0) + V''_\theta(X, \tilde{\theta})\frac{(\theta_* - \theta_0)^2}{2}$\\
+$V'_\theta(X, \theta_0)(\theta_* - \theta_0) = -V(X, \theta_0) - V'(X, \tilde{\theta})\frac{(\theta_* - \theta_0)^2}{2}$\\
+$\sqrt{n}V'_\theta(X, \theta_0)(\theta_* - \theta_0) = -\sqrt{n}V(X, \theta_0) - \sqrt{n}V''_\theta(X, \tilde{\theta})\frac{(\theta_* - \theta_0)^2}{2}$\\
+$A_n := -\sqrt{n}V(X, \theta_0)$\\
+По ЦПТ:\\
+$A_n \to N(0, i(\theta_0))$\\
+$\sqrt{n}V''_\theta(X, \tilde{\theta})\frac{(\theta_* - \theta_0)^2}{2} = n^{\frac{3}{2}} - \frac{V''_\theta(X, \tilde{\theta})}{n}\frac{(\theta_* - \theta_0)^2}{2}$\\
+$\frac{V''_\theta(X, \tilde{\theta})}{n}$ - огр по ЗБЧ\\
+$\sqrt{n}V''_\theta(X, \tilde{\theta})\frac{(\theta_* - \theta_0)^2}{2} \to N(0, i(\theta_0))$\\
+$V'(X, \theta_0) = n \frac{V'(X, \theta_0)}{n} \xrto[]{\text{ЗБЧ}} -i(\theta)$\\
+$\Var \widehat{\theta} \geq \frac{[\tau'(\theta)]^2}{ni(\theta)}$\\
+Рассмотрим показатель:\\
+$\frac{[\tau'(\theta)]^2}{ni(\theta) \cdot \Var \widehat{\tau(\theta)}}$ - Эффективность\\
+Ассимптотическая Эффективность: Пусть $\sqrt{n}(\widehat{\theta} - \theta_0) \to N(0, \frac{\sigma^2}{n})$\\
+$\frac{1}{i(\theta)\sigma^2}$ - показатель состоятельной эффективности\\
+\section{Экспоненциальное семество распределений}
+Пусть наше распределение относится к экспоненциальному семейству распределений если:\\
+$p(x, \theta) = \exp(A(\theta)B(x) + C(\theta) + D(x))$\\
+К таким распределениям относятся: $N(), \Gamma(), Pois(), Bin, NB$\\
+$\ln{p(x, \theta)} = A(\theta)B(x) + C(\theta) + D(x)$\\
+$\frac{\pat \ln{p(x, \theta)}}{\pat \theta} = A'(\theta)B(x) + C'(\theta)$\\
+$V(X, \theta) = A'(\theta)\displaystyle\sum B(X_i) + nC'(\theta)$\\
+$V(X, \theta) = n(A'(\theta)\overline{B(X)} + C''(\theta))$\\
+$\frac{V(X, \theta)}{n} - C'(\theta) = A'(\theta)\overline{B(X)}$\\
+$\overline{B(X)} = \frac{V(X, \theta)}{nA'(\theta)} - \frac{C'(\theta)}{A'(\theta)}$\\
+$\overline{B(X)}$ - оптимальная оценка для $(-\frac{C'(\theta)}{A'(\theta)})$\\
+\section{Байесовская постановка}
+$X_1, \dots, X_n \sim F_\theta$\\
+$\theta \sim \pi(\theta)$ - prior\\
+$l(\widehat{\theta}, \theta)$ - функция потерь\\
+$l(\widehat{\theta}, \theta) = (\widehat{\theta} - \theta)^2$ (default)\\
+$R(\widehat{\theta}, \theta) = El(\widehat{\theta}, \theta)$ - риск\\
+$r(\widehat{\theta}) = E_{\pi(\theta)}R(\widehat{\theta}, \theta)$ - байесовский риск\\
+$\widehat{\theta}_B = \underset{\theta}{argmin}r(\widehat{\theta})$\\
+$r(\widehat{\theta}) = El(\widehat{\theta}, \theta)$\\
+Давайте вспомним теорему Байеса:\\
+$P(A | B) = \frac{P(B | A)P(A)}{P(B)}$\\
+$P(\theta | X) = \frac{L(X|\theta)\pi(\theta)}{\displaystyle\int L(X | \theta)\pi(\theta)d\theta}$\\
+pisterior = likelihoox $\times$ prior\\
+$\widehat{\theta}_B = \underset{\widehat{\theta}}{argmin}E[l(\widehat{\theta}) | X]$\\
+$r(\theta_*) \leq r(\widehat{\theta})$\\
+TODO: как будет не лень я допишу пример 1:05 лекция 6\\
+$l(\widehat{\theta}, \theta)$ - loss function\\
+$R(\widehat{\theta}, \theta) = E_\theta l(\widehat{\theta}, \theta)$\\
+$r(\widehat{\theta}) = E_{\pi(\theta)}R(\widehat{\theta}, \theta)$\\
+$\widehat{\theta_B} = \underset{\widehat{\theta}}{argmin} E(l(\widehat{\theta}, \theta) | X)$\\
+$l(\widehat{\theta}, \theta) = (\widehat{\theta} - \theta)^2$\\
+$\widehat{\theta_B} = E(\theta | X)$
+\section{Минимаксные оценки}
+$m(\widehat{\theta}) = \underset{\theta}{sup} R(\widehat{\theta}, \theta)$\\
+$\widehat{\theta_{WC}} = argmin m(\widehat{\theta})$ - минимаксная оценка\\
+$r(\widehat{\theta}) \leq m(\widehat{\theta})$\\
+\textbf{Утверждение}\\
+$\exists \pi(\theta)$ - prior : $R(\widehat{\theta_B}, \theta)$ = const $\Rto \widehat{\theta}_{WC} = \widehat{\theta}_B$\\
+Рассмотрим пример:\\
+$Bern(p):$ prior: B(a, b)\\
+$\widehat{p}_B = \frac{a + X}{a + b + n}, X = \displaystyle\sum_{k = 1}^n X_k$\\
+$R(\widehat{p}_B, p) = MSE \widehat{p}_B = E(\widehat{p}_B - p)^2 = \Var \widehat{p}_B + bias^2\widehat{p}_B$\\
+$bias \widehat{p}_B = E \frac{a + X}{a + b + n} - p = \frac{a = np}{a + b + n} - p = \frac{a - ap - bp}{a + b + n}$\\
+$\Var \widehat{p}_B = \frac{1}{(a + b + n)^2}\Var X = \frac{npq}{(a + b + n)^2}$\\
+$R(\widehat{p}_B, p) = \frac{(a - ap - bp)^2 + npq}{(a + b + n)^2} = \frac{(a - p(a + b))^2 + bp(1 - p)}{(a + b + n)^2} = \frac{p^2((a + b)^2 - n) + p(-2a(a + b) + n) + a^2}{(a + b + n)^2}$\\
+$\begin{cases}
+    (a + b)^2 = n\\
+    2a(a + b) = n
+\end{cases} = \begin{cases}
+    a + b = \sqrt{n}\\
+    a = \frac{\sqrt{n}}{2}
+\end{cases} \Rto b = \frac{\sqrt{n}}{2}$\\
+\begin{itemize}
+    \item Достаточность и полные статистики
+    \item Робастность (устойчивость относительно выборосов, устойчивость относительно изменения параметров распределения)
+\end{itemize}
+\section{Интервальное оценивание}
+\textbf{Определение. Доверительный интервал}\\
+$X_1, \dots, X_n \sim F_\theta, \theta \in \Theta \subset \mathbb{R}$\\
+$1 - \alpha = \gamma \in (0, 1)$ - уровень доверия\\
+default: 0.9, 0.95, 0.99\\
+$(T_l(X), T_r(X))$ - доверительный интервал уровня $\gamma = 1 - \alpha$ если $p(\theta \in (T_l(X), T_r(X)) \geq \gamma)$\\
+Пусть $T(X, \theta) \sim G$ - не зависит от $\theta$\\
+Рассмторим $p(q_1 < T(X, \theta) < q_2) = 1 - \alpha$\\
+$q_1 = q_{\frac{\alpha}{2}}$\\
+$q_2 = q_{1 - \frac{\alpha}{2}}$\\
+\textbf{Универсальный рецепт (нет)}\\
+а) $F_\theta(X_k)$\\
+$P(F_\theta(X_k) \leq t) = P(X_k \leq F_\theta^{-1}(t)) = F_\theta(F_\theta^{-1}(t)) = t$\\
+б) $-\ln{F_\theta(X_k)} \sim Exp(1)$\\
+$p(-\ln{U} \leq t) = p(U \geq e^{-t}) = 1 - e^{-t}$\\
+в) $-\displaystyle\sum \ln{F_\theta(X_k)} \sim \Gamma(n, 1)$\\
+Доверительные интервалы нормального закона. Теорема Фишера\\
+\textbf{Лемма о независимотси линейной и квадратичной статистик}\\
+$X_1, \dots, X_n \sim N(\mu, \sigma^2)$\\
+$T = AX, X = (X_1, \dots, X_n)^T A \in M_{m \times n}(\mathbb{R})$\\
+$Q = X^T B X, B \in M_n(\mathbb{R}), B = B^T$\\
+Тогда T, Q - независимы\\
+$AB = 0$\\
+\textbf{Доказательство}\\
+$\Lambda = U^TBU$\\
+$\Lambda = diag(\lambda_1, \dots, \lambda_m, 0, 0)$\\
+$\lambda_k$ - собственное число не 0\\
+$U = (u_1, \dots, u_n)$ - собственные векторы ортонормированного базиса $\LRto B = U\Lambda U^T = \displaystyle\sum_{j = 1}^m \lambda_j u_j uj^T \Rto Q = \displaystyle\sum_{j = 1}^M \lambda_j (X^TU_j)(U_j^TX) = \displaystyle\sum_j \lambda_j (U_j^T X)^2$\\
+$A(\displaystyle\sum_{j = 1}^m \lambda_j u_j u_j^T) = 0$\\
+$\displaystyle\sum_{j = 1}^m \lambda_j A U_j u_j^T = 0$\\
+Зафиксируем $1 \leq k \leq m$ домножим справа на $u_k$\\
+$Au_k = 0 \Rto \forall i A[i, *]u_k = 0$\\
+Нам надо доказать, что $\forall i, k A[i, *]X$ и $u_k^TX$ - нез\\
+$\Cov(A[i, *]X, u_k^TX) = \Cov(A[0, *]X, X^Tu_k) = A[i, *] \Var X u_k = \sigma^2 A[i, *]u_k = 0$\\
+\textbf{Лемма о независимости двух квадратичных статистик}\\
+$Q_1 = X^T B_1 x$\\
+$Q_2 = X^TB_2X$\\
+Тогда $Q_1, Q_2$ - нез\\
+$B_1 B_2 = B_2 B_1 = 0$\\
+\textbf{Определение $X_n$ - квадратичная}\\
+$X_1, \dots, X_n \sim N(0, 1)$\\
+$\displaystyle\sum_{k = 1}^{n}X_k^2 \sim \Xi^2(n)$ (распределение)\\
+хи-кквадрат с n степенями свободы\\
+\textbf{Лемма о распределении квадратичной статистики}\\
+$X_1, \dots, X_n \sim N(0, 1)$\\
+$Q = X^TBX$\\
+$B = B^2$\\
+Тогда $Q \sim \Xi^2(r), r = rank(B = tr(B))$\\
+$Q = \displaystyle\sum_{k = 1}^n (u_k^T X)^2 \sim \Xi^2(r)$\\
+$u_k^T \sim N(u_k^T EX, u_k^T I_nu_k) = N(0, 1)$\\
+$\Cov(u_k^TX, u_j^TX) = 0$\\
+$B = U \Lambda U^T$\\
+$rank B = rank \Lambda = tr \Lambda$\\
+$tr B = tr(U \Lambda U^T)$\\
+Заметим что $B_{j, j} = \lambda_j u_j u_j^T = \lambda_j$\\
+\textbf{Теорема Фишера}\\
+$X_1, \dots, X_n \sim N(\mu, \sigma^2) \Rto$\\
+\begin{enumerate}
+    \item $\overline{X} \sim N(\mu, \frac{\sigma^2}{n})$
+    \item $\frac{n S_*^2}{\sigma^2} = \frac{(n - 1)S^2}{\sigma^2} \sim X^2(n - 1)$
+    \item $S^2, \overline{X}$ - нез
+\end{enumerate}
+$Y_j = \frac{X_j - M}{\sigma}$\\
+$\overline{X} \frac{1}{\sigma}(\overline{X} - M)$\\
+$S_*^2(Y) = \frac{1}{n} \displaystyle\sum_{j = 1}^n (Y_j - \overline{Y})^2 = \frac{S_*^2(X)}{\sigma^2}$\\
+$\overline{Y} = \frac{\sum Y_j}{n} = \frac{(\frac{1}{n}, \dots, \frac{1}{n})}{b} (Y_1, \dots, Y_n)^T = bY$\\
+$nS_*^2(Y) = (Y - BY)^T(Y - BY) = Y^T(I - B)^T(I - B)Y \sum \Xi^2(tr(I - B))$\\
+Для того чтобы доказать третье утверждение\\
+$b(I - B) = b - b = 0$\\
+Тогда мы пользуемся первой леммой\\
+Таким образом теорема Фишера доказана.\\
+Мы доказали теорему Фишера давайте теперь с помощью теоремы мы рассмотрим задачу построения доверительных интервалов нормального закона\\
+\begin{itemize}
+    \item $\sigma^2$ - известно, $\mu = ?$\\
+    Рассмотрим два варианта: $\frac{X_1 - \mu}{\sigma} \sim N(0, 1)$\\
+    $\sqrt{n}\frac{\overline{X} - \mu}{\sigma} \sim N(0, 1)$\\
+    Доверительный интервал уровня $1 - \alpha$ $[\overline{X} - \frac{q_{1 - \frac{\alpha}{2}\sigma}}{\sqrt{n}}, \overline{X} + \frac{q_{1 - \frac{\alpha}{2}\sigma}}{\sqrt{n}}]$
+    \item $\mu$ - известно, $\sigma^2 = ?$\\
+    $-q \leq \sqrt{n}\frac{(\overline{X} - \mu)}{\sigma} \leq q$\\
+    $-q\sigma \leq \sqrt{n}(\overline{X} - \mu) \leq q\sigma$\\
+    $\frac{\sqrt{n}(\overline{X} - \mu)}{q} \leq \sigma$\\
+    $-\frac{\sqrt{n}(\overline{X} - \mu)}{q} \leq \sigma$
+\end{itemize}
+Рассмотрим следующую статистику:\\
+$\displaystyle\sum \frac{(X_i - \mu)^2}{\sigma^2} \sim \Xi^2(n)$\\
+$P(q_{\frac{\alpha}{2}} \leq \displaystyle\sum \frac{(X_i - \mu)^2}{\sigma^2} \leq q_{1 - \frac{\alpha}{2}}) = 1 - \alpha$\\
+Доверительный интервал:\\
+$\frac{\displaystyle\sum (X_i - \mu)^2}{q_{1 - \frac{\alpha}{2}}} \leq  \sigma^2 \leq \frac{\displaystyle\sum(X_i - \mu)^2}{q_{\frac{\alpha}{2}}}$\\
+Давайте теперь рассмотрим задачу построения доверительного интревала $\mu = ?, \sigma^2 = ?$\\
+Воспользуемся теоремой Фишера:\\
+$\frac{n S_*^2}{\sigma^2} \sim \Xi^2(n - 1)$\\
+Доверительный интервал: $\frac{n S_*^2}{q_{1 - \frac{\alpha}{2}}} \leq \sigma^2 \leq \frac{n S_*^2}{q_{\frac{\alpha}{2}}}$\\
+\textbf{Определение. Распреление Стьюдента}\\
+$X_0, X_1, \dots, X_n$ - нез, $N(0, 1)$\\
+$\frac{X_0}{\sqrt{\frac{1}{n}\displaystyle\sum_{k = 1}^n X_k^2}} \sim T(n)$\\
+n - степени свободы (deg of freedom)\\
+Давайте выведем статистику:\\
+$\frac{\sqrt{n}\frac{\overline{X} - \mu}{\sigma}}{\sqrt{\frac{1}{n - 1}\frac{n s_*^2}{\sigma^2}}} = \sqrt{n - 1}\frac{\overline{X} - \mu}{S_*} \sim T(n - 1)$\\
+$\frac{\sqrt{n}\frac{\overline{X} - \mu}{\sigma}}{\sqrt{\frac{1}{n - 1} \frac{(n - 1)S^2}{\sigma^2}}} = \sqrt{n}\frac{\overline{X} - \mu}{S}$\\
+Доверительный интервал:\\
+$\overline{X} - \frac{q_{1 - \frac{\alpha}{2}S}}{\sqrt{n}}, \overline{X} + \frac{q_{1 - \frac{\alpha}{2}S}}{\sqrt{n}}$\\
+\textbf{Определение. Распределение Фишера}\\
+$\Xi_n^2 \sim \Xi^2(n)$\\
+$\Xi_m^2 \sim \Xi^2(m)$\\
+Они независимы\\
+$\frac{\Xi_n^2(n)}{\Xi_m^2(m)} \sim F(n, m)$
+\section{Ассимптотические доверительные интервалы}
+Раньше мы говорили $P(\theta \in (l_n, r_n)) \geq 1 - \alpha$\\
+Таперь же мы будем говорить $\lim_{n \to \infty} P(\theta \in (l_n, r_n)) \geq 1 - \alpha$\\
+$T(X, \theta) \xrto[]{d} G$ не зависит от $\theta$\\
+\begin{enumerate}
+    \item ЦПТ и ее следствия\\
+    $\sqrt{n}\frac{\overline{X} - \mu}{\sigma} \to N(0, 1)$\\
+    $\sqrt{n}\frac{\overline{X} - \mu}{S} \to N(0, 1)$\\
+    Доверительный интервал: $\overline{X} \pm \frac{q_{1 - \frac{\alpha}{2}}S}{\sqrt{n}}$\\
+    $\sqrt{n}\frac{S_*^2 - \sigma^2}{\sqrt{\widehat{\beta_4} - S_*^4}} \to N(0, 1)$\\
+    Доверительный интервал: $S_*^2 \pm \frac{q_{1 - \frac{\alpha}{2}}\sqrt{\widehat{\beta_4} - S_*^4}}{\sqrt{n}}$
+    \item Теорема об ассимтотике среднего члена вариационного ряда\\
+    $\sqrt{n}\frac{X_{(\lfloor np \rfloor)} - q_p}{\sqrt{p(1 - p)}} f(q_p) \to N(0, 1)$\\
+    Доверительный интервал для медианы: $p = \frac{1}{2}$\\
+    $\sqrt{n}f(q_p)\frac{X_{(\lfloor \frac{n}{2} \rfloor)} - q_p}{\frac{1}{2}}$ (зачастую f это константа)\\
+    Доверительный интервал: $X_{(\lfloor \frac{n}{2}) \rfloor} \pm \frac{q_{1 - \frac{\alpha}{2}}}{\sqrt{n} \cdot const}$\\
+    \item Доверительный интервалы из ассимтотической нормальности оценок максимального правдоподобия\\
+    \item Теорема об ассимтотике крайнего члена вариационного ряда\\
+    $n(1 - F(X_{m + 1 - s})) \to \Gamma(s, 1)$\\
+    Пример:\\
+    $U[0, \theta]$\\
+    $F(x) = \begin{cases}
+        0, x < 0\\
+        \frac{x}{\theta}, 0 \leq x \leq \theta\\
+        1, x > \theta
+    \end{cases}$\\
+    $\frac{nX_{(r)}}{\theta} \to \Gamma(r, 1)$\\
+    $q_{\frac{\alpha}{2}} \leq \frac{nX_{(r)}}{\theta} \leq q_{1 - \frac{\alpha}{2}} \Rto \frac{nX_{(r)}}{q_{1 - \frac{\alpha}{2}}} \leq \theta \leq \frac{nX_{(r)}}{q_{\frac{\alpha}{2}}}$
+\end{enumerate}
+\section{Проверка статистических гипотез}
+Нам надо будет выделить основное предположение (по умолчанию) и альтернативное предположение (наше подозрение или то, что мы хотим доказать)\\
+Давайте рассуждать:\\
+рациональное, с точки зрения инопланетянина (не опираться на жизненный опыт)\\
+В стране H с континентальное системой права и есть уголовный суд. Какое будет основное предположение для судьи? Не виновен. А альтернативное? Виновен.\\
+Давайте посмотрим на другой пример\\
+В паспорте у некоторых написана буква М, а у других Ж, посмотрим связаны ли буквы и успеваемость? По умолчанию не связаны, а альтернативное: М и Ж учатся по разному. Пусть мы сидим на филфаке, тогда есть мнение, что девочки учатся лучше, или же мы сидим на программировании и тогда мальчики учатся лучше. Альтернатива не всегда является отрицанием первого.\\
+Еще один пример:\\
+Пусть робот кидает монетку. По умолчанию робот кидает честно, альтернативно робот жулик или он жулик в определенную сторону.\\
+Замеры показателя (температуры человека). По умолчанию 36.6, альтернативно мы можем подозревать, что температура $\neq$ 36.6 или же можем рассмотреть перепад в одну из сторон (в зависимости от болезни)\\
+Пусть есть фактор цена на недвижимость и есть фактор расстояние до центра города. Основное предположение: они не зависят, Альтернатива: ближе к центру - больше цена.\\
+Мы можем изготовить некое вещество и посмотрим как оно влияет на здоровье. Основное: не влияет, альтернатива: it depends.\\
+$X_1, \dots, X_n$ - выборка в широком смысле.\\
+$(X_1, \dots, X_n) \sim F$\\
+$H_0$ - нулевая гипотеза.\\
+$H_1$ - альтернатива.\\
+Так же пусть нам дали уровень значимости\\
+$\alpha \in (0, 1)$ (по умолчанию 0.1, 0.05, 0.01, 0.001)\\
+Статистический тест (критерий)\\
+$\delta(X, \alpha) = \begin{cases}
+    accept H_0\\
+    reject H_0 (w.\text{ } respect\text{ to } H_1)
+\end{cases}$
+То есть в первом случае данные противоречат $H_0$, а втором противоречат.\\
+Но это не значит, что мы доказали утверждение.\\
+\end{document}
