@@ -552,7 +552,7 @@ $S_n \subset A_n B_n \subset A_n \Rightarrow P(A_n) \to 1$\\
 Давайте поговорим про свойства метода максимального правдоподобия\\
 \begin{enumerate}
     \item Принцип инвариантности\\
-    $\theta \in Theta \xrto[\varphi]{biection} \gamma \in \Gamma$\\
+    $\theta \in \Theta \xrto[\varphi]{biection} \gamma \in \Gamma$\\
     $\theta = \varphi^{-1}(\theta) \LRto \gamma = \varphi(\theta)$\\
     $\underset{\theta}{\sup}L(X, \varphi(\gamma)) = \underset{\gamma}{\sup}L(x, \gamma)$\\
     $\gamma* = \varphi(\theta*)$\\
@@ -810,10 +810,67 @@ $H_1$ - альтернатива.\\
 Так же пусть нам дали уровень значимости\\
 $\alpha \in (0, 1)$ (по умолчанию 0.1, 0.05, 0.01, 0.001)\\
 Статистический тест (критерий)\\
-$\delta(X, \alpha) = \begin{cases}
+$\delta(X, \alpha, H_0, H_1) = \begin{cases}
     accept H_0\\
     reject H_0 (w.\text{ } respect\text{ to } H_1)
 \end{cases}$
 То есть в первом случае данные противоречат $H_0$, а втором противоречат.\\
 Но это не значит, что мы доказали утверждение.\\
+Пусть у нас есть функция $T(X)$ - статистика критерия\\
+$T(X)$ либо в точности, либо в пределе стремится к $G$ при условии $H_0 (\sim \text{ or } \to)$\\
+$P(T(X) \in T_0(\alpha) | H_0) = 1 - \alpha$\\
+$\text{if } T(x) \in T_1(\alpha): \text{ reject } H_0$\\
+$\text{else: accept} H_0$\\
+$T_0(\alpha)$ - область принятия\\
+$T_1(\alpha)$ - область опровержения\\
+Далее на лекции идет пример с левосторонним, правосторонним и двойным тестом\\
+\begin{enumerate}
+    \item left: $T_0(\alpha) = [q_\alpha, +\infty)$
+    \item right: $T_1(\alpha) = (-\infty, q_\alpha)$
+    \item two: $T_0(\alpha) = [q_{\frac{\alpha}{2}}, q_{1 - \frac{\alpha}{2}}], T_1(\alpha) = \overline{T_0(\alpha)}$
+\end{enumerate}
+$p_l = P(U \leq T(x) | H_0)$\\
+$p_r = P(U > T(x) | H_0)$\\
+$p = 2min(p_l, p_r)$\\
+$\text{if p < } \alpha: \text{ reject }H_0$\\
+$\text{else: accept }H_1$\\
+\section{Статистические критерии и доверительные интервалы}
+Когда мы строили доверительные интервалы то мы зажимали статистику между квантилями. Это похоже на двухсторонний тест.\\
+$X_1, \dots, X_n \sim F_{\theta}$\\
+$T(X, \theta) \to U \sim G$\\
+$P(q_{\frac{\alpha}{2}} \leq T(X, \theta) \leq q_{1 - \frac{\alpha}{2}}) = 1 - \alpha$\\
+$H_0 : \theta = \theta_0$\\
+$P(T(X, \theta_0) \in T_0(\alpha) | \theta = \theta_0) = 1 - \alpha$\\
+$H_1 = \theta \neq \theta_0, \theta > \theta_0, \theta < \theta_0$\\
+Пример:\\
+1) $X_1, \dots, X_n \sim F, \mu = EX_1, \exists \Var X$\\
+$H_0: \mu = \mu_0$\\
+$T(X) = \sqrt{n} \frac{\overline{X} - \mu_0}{S} \to N(0, 1)$ если $\mu = \mu_0$\\
+При $H_1: \mu \neq \mu_0$ у нас двухсторонняя критическая область\\
+При $H_1: \mu > \mu_0$ у нас правостороння критическая область\\
+При $H_1: \mu < \mu_0$ у нас левосторонняя критическая область\\
+Дальше для этого приводится пример с больницей (нам либо надо просто проверить, что температура не стандартная, либо нам важно знать, что она больше нормы, либо нам важно знать, что она ниже нормы)\\
+$P(\sqrt{n}\frac{\overline{X} - \mu_0}{S} \in T_0(\alpha) | \mu \neq \mu_0) = P(\sqrt{n}\frac{\overline{X} - \mu}{S} + \frac{\mu - \mu_0}{S}\sqrt{n} | \mu \neq \mu_0)$\\
+Это будет стремиться либо к $\Phi(-\infty)$ либо $1 - \Phi(+\infty)$
+\section{Критерий Колмогорова}
+$X_1, \dots, X_n \sim F$\\
+$H_0: F = F_0$ ($F_0$ - непр)\\
+$H_1: F \neq F_0$\\
+Идея основана на теореме Колмогорова (было в начале семестра)\\
+$D_n = \sqrt{n}\underset{x \in \mathbb{R}}{sum}|F_n(x) - F_0(x)|$, $F_n$ - эмпирическая функция распределения\\
+$\text{if }D_n > q_{1 - \alpha} \text{ then reject } H_0\text{ else accept } H_0$\\
+1) $n \geq 20$ работает хорошо, при маленьких n есть спец таблицы\\
+2) Так же есть приблеженные формулы для $D_n$\\
+3) $H_0: F = F(\theta), H_1: \neg H_0 \Rto D_n = \sqrt{n}\underset{x}{sup}|F_n(x) - F_0(x, \theta)|$\\
+$\theta \to \widehat{\theta}$\\
+В пределе будет более сложная формула\\
+\section{Критерий Смирнова}
+$X_1, \dots, X_n$\\
+$Y_1, \dots, Y_m$\\
+Они независимы\\
+$H_0: F_X = F_Y (= F_0)$\\
+$H_1: \neq H_0$\\
+Тут идея основана на формуле Смирнова\\
+$D_{n, m} = \sqrt{n}\underset{x}{sup}|F_n(x) - F_m(x)$\\
+$T_1(\alpha) = (q_{1 - \alpha}, +\infty)$
 \end{document}
