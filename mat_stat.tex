@@ -948,5 +948,97 @@ $\Xi^2 = \displaystyle\sum_{1 \leq i \leq N, 1 \leq j \leq M} \frac{(\nu_{ij} - 
 $df = MN - 1 - (N - 1) - (M - 1) = MN - N - M + 1 = N(M - 1) - (M - 1) = (M - 1)(N - 1)$\\
 $\widehat{p_{Xi}} = \frac{\nu_{i*}}{n}$\\
 $\widehat{p_{Yj}} = \frac{\nu_{j*}}{n}$\\
+TODO пример в коэффициентом Пирсона
+\section{Критерий квантилей}
+$H_0:$\\
+$F(q_1) = \alpha_1\\
+F(q_2) = \alpha_2\\
+\dots \\
+F(q_N) = \alpha_N$\\
+где $\alpha_0 = 0 < \alpha_1 < \dots < \alpha_N < 1 = \alpha_{N + 1}$\\
+$H_1: \neg H_0$\\
+$q_0 = \inf \supp P < q_1 < \dots < q_N < \sup \supp P = q_{N + 1}$\\
+$\Delta_1 = [q_0, q_1)\\
+\dots\\
+\Delta_{N + 1} = [q_N, q_{N + 1})$\\
+$P(\Delta_1) = \alpha_1 - \alpha_0\\
+\dots\\
+P(\Delta_N) = \alpha_{N + 1} - \alpha_N$\\
+Рассмотрим особый случай $H_0: F(q) = \frac{1}{2}$\\
+\section{Критерий знаков}
+$(X_1, Y_1)^T, \dots, (X_n, , Y_n)^T$\\
+Мы хотим проверить что:\\
+a) выборки независимы\\
+б) распределения одинаковы\\
+$F(x, y) = F_1(x) \cdot F_1(y)$\\
+$U = X - Y \Rto \med U = 0$\\
+$\nu_1$ - количество элементов новой выборки > med\\
+$Z_n = \frac{2}{\sqrt{n}}(\nu_1 - \frac{n}{2}) \to N(0, 1)$\\
+На предыдущей лекции мы обсудили:\\
+$Z_n = \sqrt{n} \rho_n, \rho_n$ - коэффициент корреляции Пирсона\\
+\textbf{Теорема}\\
+$(X_1, Y_1)^T, \dots, (X_n, , Y_n)^T \sim N(\dots, \dots) \Rto \frac{\sqrt{n -2} \rho_n}{\sqrt{1 - \rho_n^2}} \sim T(n - 2)$\\
+$H_0: \rho = 0\\
+H_1: (\rho \neq 0, \rho > 0, \rho < 0)$
+\section{Ранговые критерии}
+\textbf{Определение. Ранг}\\
+$X_1, \dots, X_n$ - выборка\\
+$r(X_k)$ - номер $X_k$ в вариационном ряде\\
+$X_1, \dots, X_n$\\
+$Y_1, \dots, Y_m$\\
+Это две независиммых выборки, давайте объединим их в одну\\
+Рассмотрим $(X_1, \dots, X_n, Y_1, \dots, Y_m)$ - Статистика Вилкоксона\\
+$R_i$ - ранг $X_i$, в объединенной выборке\\
+$T = R_1 + \dots, R_n$\\
+$Z_{rs} = \mathbb{1}(X_r < Y_s)$\\
+$U = \displaystyle\sum_{r = 1}^n \displaystyle\sum_{s = 1}^m Z_{rs}$ - Мант-Уитни\\
+$T + U = mn + \frac{n(n + 1)}{2}$\\
+Хотим проверить, что распределение X совпадает с Y\\
+$EU = mn E \mathbb{1}(X < Y) = mnP(X < Y) = \frac{1}{2}$ - при условии $H_0$\\
+$H_0: P(X < Y) = \frac{1}{2}$\\
+$U \sim N(\frac{mn}{2}, \frac{nm(m + n + 1)}{12})$\\
+$(X_1, Y_1)^T, \dots, (X_n, , Y_n)^T$\\
+Хотим проверить независимость\\
+$R_i$ - ранг $X_i$ (в своей выборке)\\
+$S_i$ - ранг $Y_i$ (в своей выборке)\\
+$\rho$ - выборочный коэффициент корреляции между $R_i$ и $S_i$ - коэффициент корреляции Спирмена\\
+$\rho = \frac{12}{n(n^2 - 1)} \displaystyle\sum (R_i - \frac{n + 1}{2})(S_i - \frac{n + 1}{2})$\\
+$H_0: \rho = 0, \sqrt{n}\rho \to N(0, 1)$\\
+$H_1: \rho \neq 0, \rho > 0, \rho < 0$\\
+\bf{Коэффициент корреляции Кенделла}\\
+$\tau = \frac{2}{n(n - 1)} \displaystyle\sum_{i = 1}^{n - 1}\displaystyle_{j = i + 1}^{n}\sign(T_j - T_i)$\\
+$H_0$ верно $\Rto E\tau = 0, \Var \tau = \frac{2(2n + 5)}{9n(n - 1)}$\\
+$\tau \approx N(0, \frac{4}{9n})$\\
+$H_0: \tau = 0$\\
+$H_1: > 0, < 0, \neq 0$\\
+\section{Критерий инверсии}
+$X_{(1)} \leq \dots \leq X_{(n)}$
+Крайние ситуации: выборка отсортированна, то есть трудно поверить, что у нас все случайно\\
+$\nu_i$ - количество инверсий для элемента $X_i$\\
+$T = \nu_1 + \dots + \nu_{n}$\\
+$ET = \frac{n(n - 1)}{4}$\\
+$\Var T = \frac{n(n - 1)(2n + 5)}{72}$\\
+Статистика $T$ - ассимптотически нормальная\\
+\section{Линейные статистические модели}
+$Y = Xb + \varepsilon$\\
+$X \in M_{n \times m}(\mathbb{R})$ - матрица переменных\\
+$x_{ij}$ - количественная переменная\\
+$Y \in \mathbb{R}^n$ - наблюдения зависимой переменной\\
+$b \in \mathbb{R}^m$ - неизвестный вектор коэффициентов\\
+$\\varepsilon \in \mathbb{R}^n$ - случайная ошибка\\
+1) $E\varepsilon = 0$\\
+2) $\Var \varepsilon_i = \sigma^2$ - гомоскедотичность\\
+3) $\Cov(\varepsilon_i, \varepsilon_j) = 0$\\
+Наша цель оценить $b$ и $\sigma^2$\\
+\bf{Определение. Ошибка наименьших квадратов}\\
+$\widehat{b} = \argmin S^2(b)$\\
+$S^2(b) = (Xb - Y)^T(Xb - Y)$\\
+$A = X^T X \in M(m \times n)$\\
+$\frac{1}{n}X^T X$\\
+$rank(A) = m$\\
+\bf{Теорема}\\
+$\widehat{b} = A^{-1}X^T Y$\\
+\bf{Доказательство}\\
+$S^2(\widehat{b} + \delta) = $ %TODO
 
 \end{document}
