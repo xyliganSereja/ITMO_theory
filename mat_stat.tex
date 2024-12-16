@@ -1025,7 +1025,7 @@ $X \in M_{n \times m}(\mathbb{R})$ - матрица переменных\\
 $x_{ij}$ - количественная переменная\\
 $Y \in \mathbb{R}^n$ - наблюдения зависимой переменной\\
 $b \in \mathbb{R}^m$ - неизвестный вектор коэффициентов\\
-$\varepsilon \in \mathbb{R}^n$ - случайная ошибка\\
+$\\varepsilon \in \mathbb{R}^n$ - случайная ошибка\\
 1) $E\varepsilon = 0$\\
 2) $\Var \varepsilon_i = \sigma^2$ - гомоскедотичность\\
 3) $\Cov(\varepsilon_i, \varepsilon_j) = 0$\\
@@ -1039,6 +1039,99 @@ $rank(A) = m$\\
 \bf{Теорема}\\
 $\widehat{b} = A^{-1}X^T Y$\\
 \bf{Доказательство}\\
-$S^2(\widehat{b} + \delta) = $ %TODO
+$S^2(\widehat{b} + \delta) = S^2(\widehat{b}) + \delta^T A \delta$\\ %TODO
+$t = T b, T \in M_{k \times m}, k \leq m, rank T = k$\\
+$\widehat{t} = T \widehat{b}$\\
+\bf{Теорема. Гаусс-Марков}\\
+1) $\widehat{t}$ - несмещенная оценка $t$\\
+2) $\widehat{t}$ - оптимальная оценка в классе линейных несмещенных оценок\\
+\bf{Доказательство}\\
+$E\widehat{t} = ET\widehat{b} = ETA^{-1}X^TY = TA^{-1}X^TEY = TA^{-1}X^TXb = Tb = t$\\
+$\Var(\widehat{t}) = \Var TA^{-1}X^TY = TA^{-1}X^T \Var Y X A^{-1}T^T = \sigma^2 TA^{-1}T^T$\\
+$\Var \widehat{t} = \sigma^2 TA^{-1}T^T$\\
+$\Var \widehat{b} = \sigma^2 A^{-1}$\\
+Пусть $LY$ - несмещенная оценка для $t$, т.е.\\
+$ELY = t = Tb \Rto \Var LY = \sigma^2 L L^T$\\
+Заметим, что $LL^T = (TA^{-1}X^T)(TA^{-1}X^T)^T + (L - TA^{-1}X^T)(L - TA^{-1}X^T)^T$\\
+$MSE \widehat{t} = tr \Var \widehat{t}$\\
+Тогда $L = TA^{-1}X^T$\\
+\\
+$ES^2(b) = E(Xb - Y)^T(Xb - Y) = E\varepsilon^T\varepsilon = n\sigma^2$\\
+$E(\widehat{b} - b)A(\widehat{b} - b) = \displaystyle\sum_{i, j}a_{ij}E(\widehat{b_i} - b_i)(\widehat{b_j} - b_j) = \displaystyle\sum_{i, j}a_{ij}\Cov(\widehat{b_i}, \widehat{b_j}) = \sigma^2 \displaystyle\sum_{i, j}a_{ij}a_{ij}^{-1} = \sigma^2 \displaystyle\sum_{i} \displaystyle_{j}a_{ij}a_{ji}^{-1} = \sigma^2 \displaystyle_{i = 1}^m 1 = \sigma^2 m$\\
+$S^2(b) = S^2(\widehat{b}) + (\widehat{b} - b)^TA(\widehat{b} - b) \Rto n\sigma^2 = ES^2(\widehat{b}) + m\sigma^2 \Rto \widehat{\sigma}^2 = \frac{S^2(\widehat{b})}{n - m}$ - несмещенная оценка для $\sigma^2$\\
+\section{Условные оценки наименьших квадратов}
+\bf{Определение}\\
+$Tb = t_0, T \in M_{k \times m}, rank T = k$\\
+$\widehat{b}_{T, t_0} = \underset{Tb = t_0}{\argmin} S^2(b)$ - условная оценка наименьших квадратов\\
+\bf{Теорема}\\
+$\widehat{b}_{T, t_0} = \widehat{b} - A^{-1}T^TD^{-1}(T\widehat{b} - t_0), D = TA^{-1}T^T$\\
+Можно показать: $S^2(b) = S^2(\widehat{b}_{T, t_0}) + (\widehat{b}_{T, t_0} - b)^TA(\widehat{b}_{T, t_0} - b)$\\
+Замечание: $S^2(b) = S^2(\widehat{b}) + (\widehat{b} - b)^TA(\widehat{b} - b)$\\
+$b = \widehat{b}_{T, t_0}: S^2(\widehat{b}_{T, t_0}) = S^2(\widehat{b}) + (\widehat{b} - \widehat{b}_{T, t_0})^TA(\widehat{b} - \widehat{b}_{T, t_0})$\\
+$(T\widehat{b} - t_0)^TD^{-1}(T\widehat{b} - t_0) = S^2(\widehat{b}_{T, t_0}) - S^2(\widehat{b})$\\
+"Обычное предположение": $\varepsilon \sim N(0, \sigma^2 E_n)$\\
+$Y = Xb + \varepsilon \sim N(Xb, \sigma^2E_n)$\\
+$L(b, \sigma^2, Y) = \frac{1}{(\sqrt{2\pi \sigma^2})^n}\exp(-\frac{1}{2\sigma^2}(Xb - Y)^T(Xb - Y))$\\
+$\sup L(b, \sigma^2, Y) \LRto \inf S^2(b)$\\
+$\widehat{b}$ - эффективна в классе несмещенных оценок $\Lto \widehat{b}$ - о.м.п\\
+\bf{Теорема. Основная теорема о нормальной регрессии}\\
+1) $S^2(\widehat{b}), \widehat{b}$ - нез.\\
+
+%
+% TODO: дописать две лекции!!!!!!!
+%
+
+\section{Последовательный анализ Вальда}
+$H_0: F = F_0$\\
+$H_1: F = F_1$
+$f_0, f_1$ - соответствующие плотности
+$A_0 < 1 < A_1\\
+n = 1$\\
+% $while true {\\
+% if \frac{L_{0n}}{L_{1n}} \leq A_0 \text{ then return reject H_0}\\
+% if \frac{L_{0n}}{L_{1n}} \geq A_1 \text{ then return accept H_0}\\
+% ++n
+% }$
+
+$\alpha, \beta, a_0 = \ln{A_0}, a_1 = \ln{A_1}$\\
+$Z_i = \ln{\frac{f_1(X_i)}{f_0(X_i)}}$\\
+$\displaystyle\sum_{i = 1}^{n} Z_i = \ln{\frac{L_{1n}}{L_{0n}}}$\\
+\\
+\bf{Теорема}\\
+Пусть $\nu$ - количество итераций $\Rto P(@n \geq n | H_0) \to 0, P(\nu \geq n | H_1 \to 0), n \to \infty$\\
+\bf{Доказательство}\\
+$r - fixed$\\
+$\eta_1 = Z_1 + \dots + Z_r$\\
+$\eta_1 = Z_{r + 1} + \dots + Z_{2r}$\\
+$\dots$
+$\{\nu \geq rk\} \LRto \{a_0 < \eta_1 + \dots + @n_j < a_1\}_{i \leq j \leq k} = \{a_0 < \eta_1 < a_1, a_0 < \eta_1 + \eta_2 < a_1, \dots, a_0 < \eta_1 + \dots + \eta_k < a_1\} \subset \{|\eta_j| < b = a_i - a_0\}_{1 \leq j \leq k} \Rto P(\nu \geq rk | H_s) \leq P_{1 \leq j \leq k}(|\eta_j| < b | H_s) = P_{1 \leq j \leq k}(\nu_j^2 < b^2 | H_s) = P^k(\eta_1^2 < b^2 | H_s) = p_s^k$\\
+$E_s\eta_1^2 \geq \Var_s\eta^1 = r\Var_s Z_1 > b^2, r > \max{(\frac{b^2}{\Var(Z_1 | H_0)}, \frac{b^2}{\Var{Z_1 | H_1}})_{\Var_s(\dots) = \Var(\dots | H_s)}^{E_s(\dots) = E(\dots | H_s)}} \Rto p+s < 1$\\
+$P(\nu > n | H_s) \leq P(\nu \geq rk | H_s) \leq p_s^k \to 0, k = k(n), n \to \infty$\\
+\\
+\bf{Теорема}\\
+Пусть $(\alpha, \beta)$ - вероятности $\Rto A_0 \geq A_0' = \frac{\beta}{1 - \alpha}$ и $A_1 \leq A_1' = \frac{1 - \beta}{\alpha}$\\
+$\text{if } A_0'$ и $A_1 = A_1' \text{ then } \alpha', \beta'$ - вероятности ошибок\\
+$\alpha' \leq \frac{\alpha}{1 - \beta}, \beta' \leq \frac{\beta}{1 - \alpha}$\\
+$\alpha' + \beta' \leq \alpha + \beta$
+$1 = \displaystyle\sum_{n = 1}^{\infty}P(\nu = n | H_0) = \displaystyle\sum_{n = 1}^{\infty}P(\text{accept at the step n | }H_0) + \displaystyle\sum_{n = 1}^{\infty}P(\text{reject at the step n | }H_0) = \alpha = \displaystyle\sum{n = 1}^{\infty}P(\text{reject at the step n |}H_0) \leq \frac{1}{A_1}\displaystyle\sum_{n = 1}^{\infty}P(\text{reject at the step n | }H_1)$\\
+$L_{n1} \geq L_{n0} \cdot A_1$\\
+$L_{n1 \geq L_{n0} \cdot A_1}$\\
+Аналогичным образом мы можем получить неравенство:\\
+$\beta \leq A_0(1 - \alpha)$\\
+$\alpha \leq \frac{1}{A_1}(1 - \beta)$\\
+Пусть $A_0' = \frac{\beta}{1 - \alpha}$ и $A_1' = \frac{1 - \beta}{\alpha}$ и ошибки $(\alpha', \beta') \Rto \frac{\beta}{1 - \alpha} \geq \frac{\beta'}{1 - \alpha'}$\\
+$\frac{1 - \beta}{\alpha} \leq \frac{1 - \beta'}{\alpha'} \Rto \alpha' \leq \frac{\alpha(1 - \beta')}{1 - \beta} \leq \frac{\alpha}{1 - \beta}$\\
+$\beta(1 - \alpha) \leq \beta(1 - \alpha')$\\
+$(1 - \beta)\alpha' \leq (1 - \beta')\alpha$\\
+Сложим последние два неравества и получим требуемое\\
+Давайте вспомним тождество Вальда:\\
+$(X_i)$ - независимые случайные величины с математическим ожиданием a\\
+$\nu$ - целочисленная случайная величина не зависящая от $X_i$\\
+$E\nu = b$\\
+$S_\nu = X_1 + \dots + X_\nu$\\
+$\Rto ES_\nu = ab = E(ES_\nu | \nu) = E\nu a = aE\nu = ab$\\
+$a_0 = \ln{\frac{\beta}{1 - \alpha}}, a_1 = \ln{\frac{1 - \beta}{\alpha}}$\\
+$E_s\nu \cdot E_sZ_i = E_sS_\nu \approx a_0(1 - \alpha) + a_1(1 - \beta)$\\
+$E_1\nu \cdot E_1Z_i \approx \beta a_0 + a_1(1 - \alpha)$
 
 \end{document}
